@@ -1,0 +1,41 @@
+@startuml
+
+class Customer {
+ - firstName: String
+ - lastName: String
+ - customerId: long
+ - glasses: Glasses
+}
+
+class Frame {
+ - id: long
+ - brand: String
+ - color: String
+}
+
+class Order {
+ - shippingTime: Date
+ - orderPrice: double
+ - glassesOrdered: List<Glasses>
+}
+
+class Stock {
+ - glassesInStock: List<Glasses>
+}
+
+class Glasses {
+ - id: int
+ - dioptersLeft: double
+ - dioptersRight: double
+ - leftGlassType: String
+ - rightGlassType: String
+ - frame: Frame
+ - price: double
+}
+
+Glasses "1" --- "1" Frame: is part of <
+Order "*" --- "1" Customer: makes <
+Stock "1" --- "1 or *" Glasses: includes <
+Order "1" --- "*" Stock: takes from >
+
+@enduml

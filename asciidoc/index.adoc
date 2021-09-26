@@ -1,0 +1,5 @@
+.Rednered class diagram for my micro project
+[plantuml, cld, png, align=left]
+----
+include::plantuml/cld.puml[]
+----
