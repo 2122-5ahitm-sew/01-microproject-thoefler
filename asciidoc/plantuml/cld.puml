@@ -1,41 +1,48 @@
 @startuml
 
-class Customer {
+class Artist {
+ - artistName: String
  - firstName: String
  - lastName: String
- - customerId: long
- - glasses: Glasses
+ - albums: List<Album>
+ - singles: List<Track>
+ - monthlyListeners: int
 }
 
-class Frame {
- - id: long
- - brand: String
- - color: String
+class Album {
+ - name: String
+ - artist: Artist
+ - genre: String
+ - tracklist: List<Track>
 }
 
-class Order {
- - shippingTime: Date
- - orderPrice: double
- - glassesOrdered: List<Glasses>
+class Track {
+ - title: String
+ - trackLength: LocalDate
+ - artist: Artist
 }
 
-class Stock {
- - glassesInStock: List<Glasses>
+class Tour {
+    - title: String
+    - mainArtist: Artist
+    - preAct: Artist
+    - tourStops: List<Concert>
 }
 
-class Glasses {
- - id: int
- - dioptersLeft: double
- - dioptersRight: double
- - leftGlassType: String
- - rightGlassType: String
- - frame: Frame
- - price: double
+class Concert {
+    - locationName: String
+    - performingArtists: List<Artist>
+    - date: LocalDate
+    - adress: String
+    - capacity: int
 }
 
-Glasses "1" --- "1" Frame: is part of <
-Order "*" --- "1" Customer: makes <
-Stock "1" --- "1 or *" Glasses: includes <
-Order "1" --- "*" Stock: takes from >
+
+Artist "1*" <--- "1*" Album: has >
+Artist "1" <--- "1*" Track: has (single release) >
+Artist "1" <--- "1*" Tour: performs >
+Artist "1*" <--- "1*" Concert: performs >
+Album "*" <--- "1" Track: is made of >
+Tour "1" <--- "*" Concert: has >
 
 @enduml

@@ -2,18 +2,24 @@
 
 left to right direction
 
-actor optiker as o
+actor "Label Manager" as lm
 
-package "optiker verwaltung" {
-    usecase "Kunden anlegen" as uc1
-    usecase "Lagerbestand verwalten" as uc2
-    usecase "Bestellungen absetzen" as uc3
+package "Plattenlabel" {
+    usecase "Neuen Artist anlegen" as uc1
+    usecase "Neuveröffentlichungen bei Artists hinzufügen" as uc2
+    usecase "Albumrelease hinzufügen" as uc21
+    usecase "Singlerelease hinzufügen" as uc22
+    usecase "Tour anlegen" as uc3
+    usecase "Konzerte anlegen" as uc4
 }
 
 
-o --> uc1
-o --> uc2
-o --> uc3
+lm --> uc1
+lm --> uc2
+uc2 --> uc21
+uc2 --> uc22
+lm --> uc3
+lm --> uc4
 
 
 
