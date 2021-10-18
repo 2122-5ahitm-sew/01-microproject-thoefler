@@ -23,14 +23,12 @@ class Track {
 
 class Tour {
     - title: String
-    - mainArtist: Artist
-    - preAct: Artist
     - tourStops: List<Concert>
 }
 
 class Concert {
     - locationName: String
-    - performingArtists: List<Artist>
+    - performingArtist: Artist
     - date: LocalDate
     - adress: String
     - capacity: int
@@ -38,9 +36,9 @@ class Concert {
 
 
 Artist "1*" -right--> "1*" Album: has >
-Artist "1" <-left-- "1*" Track: has (single release) >
-Artist "1" <--- "1*" Tour: performs >
-Artist "1*" <--- "1*" Concert: performs >
+Artist "1" -left--> "1*" Track: has (single release) >
+Artist "1" ---> "1*" Tour: performs >
+Artist "1*" ---> "1*" Concert: performs >
 Album "*" <--- "1" Track: is made of >
 Tour "1" <-right-- "*" Concert: has >
 
